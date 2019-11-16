@@ -10,6 +10,12 @@ router.post('/register', async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
+    // Check if email already exists
+    const emailExist = await User.findOne({email: req.body.email});
+    if (emailExist) {
+        return res.status(400).send('This email is already registered');
+    }
+
     // Create new User
     const user = new User({
         name: req.body.name,
