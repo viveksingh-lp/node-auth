@@ -9,4 +9,13 @@ const validateRegistrationData = (data) => {
     return validationSchema.validate(data);
 }
 
+const validateLoginData = (data) => {
+    const validationSchema = Joi.object({
+        email: Joi.string().email().required(),
+        password: Joi.string().min(8).required()
+    });
+    return validationSchema.validate(data);
+}
+
 module.exports.validateRegistrationData = validateRegistrationData;
+module.exports.validateLoginData = validateLoginData;
